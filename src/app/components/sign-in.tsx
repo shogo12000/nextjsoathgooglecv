@@ -1,4 +1,5 @@
 import { signIn } from "@/auth"
+
  
 export default function SignIn() {
   return (
@@ -8,7 +9,7 @@ export default function SignIn() {
         await signIn("google", {redirectTo: "/user"})
       }}
     >
-      <button type="submit">Signin with Google</button>
+      <button type="submit" className="bg-gray-300 px-2 py-1 rounded ">Signin with Google</button>
     </form>
   )
 } 
