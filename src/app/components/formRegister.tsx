@@ -3,14 +3,27 @@ import Form from "next/form";
 import { useActionState, useState } from "react";
 import { authenticate } from "../lib/actions";
 
-export default function FormLogin() {
+export default function FormRegister() {
   const [status, formAction] = useActionState(authenticate, undefined);
   const [email, setEmail] = useState("");
 
   return (
     <div>
       <Form action={formAction} className="flex flex-col gap-3">
-        <h1>USER LOGIN</h1>
+        <h1>REGISTER USER</h1>
+        <label>
+          UserName
+          <input
+            className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+            id="userName"
+            type="text"
+            name="userName"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your name"
+            required
+          />
+        </label>
         <label>
           Email
           <input
@@ -36,9 +49,7 @@ export default function FormLogin() {
             minLength={6}
           />
         </label>
-        <button type="submit" className="bg-gray-300 px-2 py-1 rounded ">
-          Login
-        </button>
+        <button type="submit" className="bg-gray-300 px-2 py-1 rounded ">Register</button>
 
         <h2>{status}</h2>
       </Form>
