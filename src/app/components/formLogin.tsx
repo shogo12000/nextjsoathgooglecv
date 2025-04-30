@@ -36,7 +36,8 @@ export default function FormLogin() {
             minLength={6}
           />
         </label>
-        <button type="submit" className="bg-gray-300 px-2 py-1 rounded ">
+        <input type="hidden" name="redirectTo" value={"/user"} />
+        <button   className="bg-gray-300 px-2 py-1 rounded ">
           Login
         </button>
 

@@ -1,12 +1,20 @@
 "use client";
 import Form from "next/form";
 import { useActionState, useState } from "react";
-import { authenticate } from "../lib/actions";
+import { registerUserForm } from "../lib/actions";
+ 
 
 export default function FormRegister() {
-  const [status, formAction] = useActionState(authenticate, undefined);
+  const [status, formAction] = useActionState(registerUserForm, undefined);
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
 
+
+  if(status === "saved"){
+    return (
+      <h1>USER SAVED SUCESSFULLY</h1>
+    )
+  }
   return (
     <div>
       <Form action={formAction} className="flex flex-col gap-3">
@@ -18,8 +26,8 @@ export default function FormRegister() {
             id="userName"
             type="text"
             name="userName"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Enter your name"
             required
           />
