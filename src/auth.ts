@@ -6,41 +6,42 @@ import bcrypt from 'bcryptjs';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google,
-    Credentials({ 
+    Credentials({
       credentials: {
         email: {},
         password: {},
       },
       authorize: async (credentials) => {
-        try{
-        const { email, password } = credentials ?? {};
-        let user = null
-        
-        if (typeof email !== 'string' || typeof password !== 'string') {
+        try {
+          const { email, password } = credentials ?? {};
+          let user = null
+
+          if (typeof email !== 'string' || typeof password !== 'string') {
+            return null;
+          }
+
+          //const pwHash = saltAndHashPassword(credentials.password)
+
+          //user = await getUserFromDb(credentials.email, pwHash)
+
+          user = await getUser(email);
+          const passwordsMatch = await bcrypt.compare(password, user.password);
+
+          console.log(passwordsMatch);
+          console.log(user);
+
+          if (!passwordsMatch) {
+            throw new Error("Invalid credentialsx.")
+          }
+
+
+          return { name: user.name, email: user.email };
+
+        } catch (error) {
+          console.error("Erro no authorize:", error);
           return null;
         }
- 
-        //const pwHash = saltAndHashPassword(credentials.password)
- 
-        //user = await getUserFromDb(credentials.email, pwHash)
 
-        user = await getUser(email);
-        const passwordsMatch = await bcrypt.compare(password, user.password);
-        
-        console.log(passwordsMatch);
-        console.log(user);
-
-        if (!passwordsMatch) {
-          throw new Error("Invalid credentialsx.")
-        }
-        
-
-        return {name: user.name, email: user.email};
-
-      }catch(error){
-        return null;
-      }
- 
       },
     }),
   ],
