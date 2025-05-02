@@ -1,4 +1,3 @@
-"use server";
 import { apiMovies } from "@/app/lib/moviActions";
 import Pagination from "../../components/pagination";
 import Image from "next/image";
@@ -17,12 +16,12 @@ interface Movie {
   poster_path: string;
 }
 
-interface MoviesPageProps {
-  searchParams?: { page?: string };
-}
-
-export default async function Movies({ searchParams }: MoviesPageProps) {
-  const n = parseInt(searchParams?.page || "1", 10);
+export default async function Movies({
+  searchParams,
+}: {
+  searchParams: { page?: string };  // Ajuste da tipagem para não gerar erro
+}) {
+  const n = parseInt(searchParams.page || "1", 10);
   const page = isNaN(n) ? 1 : n;
 
   const { total_pages, server_page, results } = await fetchMovies(page);
@@ -53,5 +52,3 @@ export default async function Movies({ searchParams }: MoviesPageProps) {
     </div>
   );
 }
-
-
