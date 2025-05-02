@@ -14,6 +14,12 @@ const fetchMovies = async (page: number) => {
   return { resp, total_pages, server_page, results };
 };
 
+interface Movie {
+  id: number;
+  title: string;
+  poster_path: string;
+}
+
 export default async function Movies({
   searchParams,
 }: {
@@ -31,7 +37,7 @@ export default async function Movies({
     <div className="flex flex-col items-center p-2">
       <h1>PAGE MOVIES</h1>
       <ul className="grid gap-2 grid-cols-4 sm:max-w-[900px] md:grid-cols-5">
-        {results.map((movie: any) => (
+        {results.map((movie: Movie) => (
           <li key={movie.id} className="w-full">
             <Image
               src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
