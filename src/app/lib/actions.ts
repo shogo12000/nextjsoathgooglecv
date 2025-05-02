@@ -1,8 +1,6 @@
 'use server'
 import { signIn } from "@/auth"
-
 import { AuthError } from 'next-auth';
-
 import { registerUser } from "./data";
 
 export async function authenticate(

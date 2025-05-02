@@ -1,14 +1,12 @@
-import { SignOut } from "../components/signout-button";
-import { auth } from "../../auth";
+import { SignOut } from "../../components/signout-button";
+import { auth } from "../../../auth";
 import type { Session } from "next-auth";
 import { redirect } from "next/navigation";
 
 export default async function UserPage() {
-  const teste = await auth();
-  console.log(teste);
+ 
   const session: Session | null = await auth();
-
-  console.log(session);
+ 
   if (!session) {
     redirect("/"); // redireciona se não estiver logado
   }

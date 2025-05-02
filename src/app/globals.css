@@ -24,3 +24,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+ 
+@media (min-width: 240px) {
+  .xs-paragraph {
+    @apply text-xs;
+  }
+ 
+}
+
+@media (min-width: 500px) {
+  .xs-paragraph {
+    @apply text-base;
+  }
+}
