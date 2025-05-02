@@ -5,12 +5,9 @@ import Image from "next/image";
 
 const fetchMovies = async (page: number) => {
   const resp = await apiMovies(page);
-  console.log(resp);
   const total_pages = resp?.total_pages;
   const server_page = resp?.page;
   const results = resp?.results || [];
-  console.log(results);
-
   return { resp, total_pages, server_page, results };
 };
 
@@ -20,17 +17,16 @@ interface Movie {
   poster_path: string;
 }
 
-export default async function Movies({
-  searchParams,
-}: {
-  searchParams: { page?: string };
-}) {
-  const n = parseInt(searchParams.page || "1", 10);
-  let page = 0;
-  if (n) {
-    page = n;
-  }
-  // const page = parseInt(  searchParams.page || "1", 10);
+interface MoviesPageProps {
+  searchParams?: {
+    page?: string;
+  };
+}
+
+export default async function Movies({ searchParams }: MoviesPageProps) {
+  const n = parseInt(searchParams?.page || "1", 10);
+  const page = isNaN(n) ? 1 : n;
+
   const { total_pages, server_page, results } = await fetchMovies(page);
 
   return (
@@ -46,7 +42,7 @@ export default async function Movies({
               height={331}
               className="object-cover rounded"
             />
-            <p className="xs-paragraph sm:text-9xl text-center mt-1">
+            <p className="text-xs text-center mt-1">
               {movie.title.length > 10
                 ? movie.title.slice(0, 7) + "..."
                 : movie.title}
@@ -55,7 +51,6 @@ export default async function Movies({
         ))}
       </ul>
 
-      {/* Agora usa o componente client */}
       <Pagination currentPage={server_page} totalPages={total_pages} />
     </div>
   );
