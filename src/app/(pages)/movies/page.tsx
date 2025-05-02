@@ -17,14 +17,15 @@ interface Movie {
 }
 
 interface MoviesPageProps {
-  searchParams?: { page?: string }; // Ajustando a tipagem para o searchParams
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default async function Movies({
   searchParams,
 }: MoviesPageProps) {
   const resolvedSearchParams = await searchParams;
-  const n = parseInt(resolvedSearchParams?.page || "1", 10);
+  const pageParam = resolvedSearchParams.page;
+  const n = parseInt(Array.isArray(pageParam) ? pageParam[0] : pageParam || "1", 10);
   const page = isNaN(n) ? 1 : n;
 
   const { total_pages, server_page, results } = await fetchMovies(page);
