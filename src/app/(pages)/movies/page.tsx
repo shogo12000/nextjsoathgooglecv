@@ -23,7 +23,8 @@ interface MoviesPageProps {
 export default async function Movies({
   searchParams,
 }: MoviesPageProps) {
-  const n = parseInt(searchParams?.page || "1", 10);
+  const resolvedSearchParams = await searchParams;
+  const n = parseInt(resolvedSearchParams?.page || "1", 10);
   const page = isNaN(n) ? 1 : n;
 
   const { total_pages, server_page, results } = await fetchMovies(page);
