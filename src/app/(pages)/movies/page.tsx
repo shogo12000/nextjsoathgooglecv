@@ -10,19 +10,20 @@ const fetchMovies = async (page: number) => {
   return { resp, total_pages, server_page, results };
 };
 
-
 interface Movie {
   id: number;
   title: string;
   poster_path: string;
 }
 
+interface MoviesPageProps {
+  searchParams?: { page?: string }; // Ajustando a tipagem para o searchParams
+}
+
 export default async function Movies({
   searchParams,
-}: {
-  searchParams: { page?: string };  // Ajuste da tipagem para não gerar erro
-}) {
-  const n = parseInt(searchParams.page || "1", 10);
+}: MoviesPageProps) {
+  const n = parseInt(searchParams?.page || "1", 10);
   const page = isNaN(n) ? 1 : n;
 
   const { total_pages, server_page, results } = await fetchMovies(page);
