@@ -10,6 +10,7 @@ const fetchMovies = async (page: number) => {
   return { resp, total_pages, server_page, results };
 };
 
+
 interface Movie {
   id: number;
   title: string;
