@@ -18,9 +18,7 @@ interface Movie {
 }
 
 interface MoviesPageProps {
-  searchParams?: {
-    page?: string;
-  };
+  searchParams?: { page?: string };
 }
 
 export default async function Movies({ searchParams }: MoviesPageProps) {
@@ -55,3 +53,5 @@ export default async function Movies({ searchParams }: MoviesPageProps) {
     </div>
   );
 }
+
+
