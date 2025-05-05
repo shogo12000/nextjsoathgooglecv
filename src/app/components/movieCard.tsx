@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { getIdMovie } from "../lib/moviActions";
+// import { getIdMovie } from "../lib/moviActions";
 import Link from "next/link";
 import { useState } from "react";
 
