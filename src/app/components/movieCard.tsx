@@ -10,9 +10,9 @@ interface Movie {
   poster_path: string;
 }
 
-const teste = () => {
-  const resp = getIdMovie();
-};
+// const teste = () => {
+//   const resp = getIdMovie();
+// };
 
 
 

@@ -1,6 +1,6 @@
 import { apiMovies } from "@/app/lib/moviActions";
 import Pagination from "../../components/pagination";
-import Image from "next/image";
+ 
 import MovieCard from "@/app/components/movieCard";
 
 const fetchMovies = async (page: number) => {
